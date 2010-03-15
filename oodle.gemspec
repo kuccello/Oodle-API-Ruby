@@ -8,5 +8,6 @@ Gem::Specification.new do |s|
   s.description = %q{Provides a ruby wrapper around the Oodle api}
   s.files = [ 'README.markdown', 'LICENSE', 'lib/oodle.rb' ]
   s.add_dependency('xml-simple')
+  s.add_dependency('json')
   s.test_file = 'test/oodle_tests.rb'
 end

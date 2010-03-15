@@ -5,6 +5,7 @@
 require 'net/http'
 require 'xmlsimple'
 require 'cgi'
+require 'json'
 
 # Oodle Module
 module Oodle
@@ -80,7 +81,7 @@ module Oodle
       url = "#{url}&ctime_high=#{CGI::escape(self.ctime_high)}" if self.ctime_high
       url = "#{url}&exclude_sources=#{CGI::escape(self.exclude_sources_as_string)}" if self.exclude_sources.size > 0
       url = "#{url}&assisted_search=#{CGI::escape(self.assisted_search)}" if self.assisted_search
-      url = "#{url}&format=#{CGI::escape(self.format)}" if self.format
+      url = "#{url}&format=#{CGI::escape(self.format)}&jsoncallback=none" if self.format
       url
     end
 
@@ -127,7 +128,7 @@ module Oodle
         # parse xml raw
         result = XmlSimple.xml_in raw, { 'ForceArray' => false, 'AttrPrefix' => true }
       when 'json'
-        # TODO parse json raw
+        result = JSON.parse(raw)
       when 'php_serial'
         # return raw
       when 'php_export'

@@ -18,7 +18,13 @@ key](http://developer.oodle.com/request-api-key) to get started.
     oodle = Oodle::API.new(API_KEY, :v2)
     oodle.region = 'chicago'
     oodle.category = 'personals'
-    oodle.fetch_listings['meta']['total'].inspect
+    oodle.fetch_listings(:json)['listings'][0]['body']
+    oodle.fetch_listings['listings'][1]['body']
+
+## Dependencies
+
+* xml-simple gem
+* json gem
 
 ## License
 
