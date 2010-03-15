@@ -40,8 +40,6 @@ module Oodle
   # Oodle Class
   #
   class API
-    logger.debug "Oodle::API is loaded." if logger
-  
     attr_accessor :key, :region, :q, :category, :attributes, :location, :radius, :start, :num, :sort, :refinements, :ctime_low, :ctime_high, :exclude_sources, :assisted_search, :format, :jsoncallback, :fetched, :version
     
     def initialize(key,version)
@@ -57,14 +55,8 @@ module Oodle
     # A convience method to do actual http pulls
     # Notice that there is not any exception trapping
     def http_pull(dest_url)
-      logger.debug "Pulling from url: #{dest_url}" if logger
-      url = URI.parse(dest_url)
-      req = Net::HTTP::Get.new(url.path)
-      res = Net::HTTP.start(url.host, url.port) {|http|
-        http.request(req)
-      }
+      res = Net::HTTP.get_response(URI.parse(dest_url))
       self.fetched = res.body
-      return self.fetched
     end
     
     # Requires version be set
@@ -89,7 +81,6 @@ module Oodle
       url = "#{url}&exclude_sources=#{CGI::escape(self.exclude_sources_as_string)}" if self.exclude_sources.size > 0
       url = "#{url}&assisted_search=#{CGI::escape(self.assisted_search)}" if self.assisted_search
       url = "#{url}&format=#{CGI::escape(self.format)}" if self.format
-      logger.debug "#{__FILE__}:#{__LINE__} [#{__method__}] -- URL CONSTRUCTED: #{url}" if logger
       url
     end
 
