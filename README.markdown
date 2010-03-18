@@ -8,6 +8,10 @@ API](http://developer.oodle.com/), you can add classified listings to your own s
 listings by category, region, and keywords. You will need to request an [API
 key](http://developer.oodle.com/request-api-key) to get started.
 
+## Installation
+
+    gem install oodle
+
 ## Example
 
     require 'rubygems'
