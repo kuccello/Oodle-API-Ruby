@@ -49,7 +49,7 @@ module Oodle
       @attributes = []
       @refinements = []
       @exclude_sources = []
-      @format = RESPONSE_FORMATS[:xml]
+      @format = RESPONSE_FORMATS[:json]
     end
     
     # A convience method to do actual http pulls

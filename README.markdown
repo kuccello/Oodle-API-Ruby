@@ -24,7 +24,7 @@ key](http://developer.oodle.com/request-api-key) to get started.
     oodle.category = 'sale'
     oodle.num = '15'
     oodle.sort = 'ctime_reverse'
-    results = oodle.fetch_listings(:json)
+    results = oodle.fetch_listings
     num = results['current']['num']
     listings = results['listings']
     (0..num-1).each { |i| p listings[i]['title'] }
