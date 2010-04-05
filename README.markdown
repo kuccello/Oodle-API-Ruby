@@ -21,9 +21,13 @@ key](http://developer.oodle.com/request-api-key) to get started.
     
     oodle = Oodle::API.new(API_KEY, :v2)
     oodle.region = 'chicago'
-    oodle.category = 'personals'
-    oodle.fetch_listings(:json)['listings'][0]['body']
-    oodle.fetch_listings['listings'][1]['body']
+    oodle.category = 'sale'
+    oodle.num = '15'
+    oodle.sort = 'ctime_reverse'
+    results = oodle.fetch_listings(:json)
+    num = results['current']['num']
+    listings = results['listings']
+    (0..num-1).each { |i| p listings[i]['title'] }
 
 ## Dependencies
 
