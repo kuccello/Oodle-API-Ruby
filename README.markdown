@@ -19,7 +19,7 @@ key](http://developer.oodle.com/request-api-key) to get started.
     
     API_KEY = '??????' # Request your API key at http://developer.oodle.com/request-api-key
     
-    oodle = Oodle::API.new(API_KEY, :v2)
+    oodle = Oodle::API.new(API_KEY)
     oodle.region = 'chicago'
     oodle.category = 'sale'
     oodle.num = '15'

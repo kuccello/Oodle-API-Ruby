@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/test-helper'
 class OodleAPITest < Test::Unit::TestCase
   
   def setup
-    @oodle = Oodle::API.new('TEST',:v2)
+    @oodle = Oodle::API.new('TEST')
     @oodle.region = 'usa'
     @oodle.q = "sale"
   end

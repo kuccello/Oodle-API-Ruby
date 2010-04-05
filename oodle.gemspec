@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = %q{oodle}
-  s.version = '1.1.1'
+  s.version = '1.1.2'
   s.authors = ["Kristan 'Krispy' Uccello", 'Albert Vernon']
   s.email = %q{kaptiankrispy@soldierofcode.com}
   s.summary = %q{Provides a Ruby wrapper around the Oodle API}

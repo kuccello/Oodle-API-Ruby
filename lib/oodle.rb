@@ -43,10 +43,9 @@ module Oodle
   class API
     attr_accessor :key, :region, :q, :category, :attributes, :location, :radius, :start, :num, :sort, :refinements, :ctime_low, :ctime_high, :exclude_sources, :assisted_search, :format, :jsoncallback, :fetched, :version
     
-    def initialize(key,version)
+    def initialize(key,version=:v2)
       @key = key
-      @version = version if version
-      @version = :v2 unless version
+      @version = version
       @attributes = []
       @refinements = []
       @exclude_sources = []
