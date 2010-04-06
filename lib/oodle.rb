@@ -16,11 +16,7 @@ module Oodle
   VERSION_URLS = {:v2=>"http://api.oodle.com/api/v2/listings"}
   RESPONSE_FORMATS = {
     :xml=>'xml', # - output is formatted in plain old XML
-    :json=>'json', # - output is fromatted in JSON (JavaScript Object Notation)
-    :php_serial=>'php_serial', # - output structure formatted in serialized PHP
-    :php_export=>'php_export', # - output structure formatted as valid PHP
-    :dump=>'dump', # - output is dumped with no formatting
-    :rss2=>'rss2' # - listing information returned in RSS 2.0 format
+    :json=>'json' # - output is formatted in JSON (JavaScript Object Notation)
   }
   
   SORT_VALUES = {
@@ -107,10 +103,6 @@ module Oodle
 =begin
   xml - output is formatted in plain old XML
   json - output is fromatted in JSON (JavaScript Object Notation)
-  php_serial - output structure formatted in serialized PHP
-  php_export - output structure formatted as valid PHP
-  dump - output is dumped with no formatting
-  rss2 - listing information returned in RSS 2.0 format
 =end    
     def fetch_raw(format=nil)
       @format = RESPONSE_FORMATS[format] if format
@@ -128,14 +120,6 @@ module Oodle
         result = XmlSimple.xml_in raw, { 'ForceArray' => false, 'AttrPrefix' => true }
       when 'json'
         result = JSON.parse(raw)
-      when 'php_serial'
-        # return raw
-      when 'php_export'
-        # return raw
-      when 'dump'
-        # return raw
-      when 'rss2'
-        # TODO parse rss2 raw
       end
       result = raw unless result
       result
