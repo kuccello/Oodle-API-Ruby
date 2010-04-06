@@ -25,9 +25,9 @@ key](http://developer.oodle.com/request-api-key) to get started.
     oodle.num = '15'
     oodle.sort = 'ctime_reverse'
     results = oodle.fetch_listings
-    num = results['current']['num']
+    num = results['meta']['returned']
     listings = results['listings']
-    (0..num-1).each { |i| p listings[i]['title'] }
+    0.upto(num - 1) { |i| p listings[i]['title'] }
 
 ## Dependencies
 
