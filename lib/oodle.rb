@@ -67,9 +67,9 @@ module Oodle
       url = "#{url}&q=#{CGI::escape(self.q)}" if self.q
       url = "#{url}&attributes=#{CGI::escape(self.attributes_as_string)}" if self.attributes.size > 0
       url = "#{url}&location=#{CGI::escape(self.location)}" if self.location
-      url = "#{url}&radius=#{CGI::escape(self.radius)}" if self.radius
-      url = "#{url}&start=#{CGI::escape(self.start)}" if self.start
-      url = "#{url}&num=#{CGI::escape(self.num)}" if self.num
+      url = "#{url}&radius=#{CGI::escape(self.radius.to_s)}" if self.radius
+      url = "#{url}&start=#{CGI::escape(self.start.to_s)}" if self.start
+      url = "#{url}&num=#{CGI::escape(self.num.to_s)}" if self.num
       url = "#{url}&sort=#{CGI::escape(self.sort)}" if self.sort
       url = "#{url}&refinements=#{CGI::escape(self.refinements_as_string)}" if self.refinements.size > 0
       url = "#{url}&ctime_low=#{CGI::escape(self.ctime_low)}" if self.ctime_low
