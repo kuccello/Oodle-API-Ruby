@@ -58,6 +58,22 @@ module Oodle
     # Requires version be set
     # Build the url from the state of the current self
     def build_url
+      unless key && key.length > 0
+        raise ArgumentError, 'Missing API key parameter. Visit http://developer.oodle.com/request-api-key/ to get one.'
+      end
+
+      unless region && region.length > 0
+          raise ArgumentError, 'Missing region paramter. Visit http://developer.oodle.com/regions-list/ for possible regions.'
+      end
+
+      unless (category && category.length > 0) || (q && q.length > 0)
+          raise ArgumentError, 'You must supply a category or query parameter. Visit http://developer.oodle.com/categories-list/ for possible categories.'
+      end
+
+      unless num.to_i >= 1 && num.to_i <= 50
+        warn "num parameter is #{num.to_i} but should be between 1 and 50"
+      end
+
       url = VERSION_URLS[self.version]
       url += "?" unless url && url[-1] == '?'
       # must CGI escape each param value

@@ -6,6 +6,7 @@ class OodleAPITest < Test::Unit::TestCase
     @oodle = Oodle::API.new('TEST')
     @oodle.region = 'usa'
     @oodle.q = "sale"
+    @oodle.num = '5'
   end
   
   def teardown
@@ -33,12 +34,61 @@ class OodleAPITest < Test::Unit::TestCase
    
     listings = @oodle.fetch_listings
     assert_not_nil(listings,"Listings as object should not be nil")
+    assert listings['meta']['returned'].to_i > 0
+
     listings_xml = @oodle.fetch_listings(:xml)
     assert_not_nil(listings_xml,"Listings XML as object should not be nil")
+    assert listings_xml['meta']['returned'].to_i > 0
+
     listings_json = @oodle.fetch_listings(:json)
     assert_not_nil(listings_json,"Listings JSON as object should not be nil")
+    assert listings_json['meta']['returned'].to_i > 0
+
     listings_dump = @oodle.fetch_listings(:dump)
     assert_not_nil(listings_dump,"Listings DUMP as object should not be nil")
   end
 
+  def test_missing_api_key
+    @oodle.key = nil
+
+    assert_raise ArgumentError do
+      @oodle.fetch_listings
+    end
+
+    @oodle.key = ''
+
+    assert_raise ArgumentError do
+      @oodle.fetch_listings
+    end
+  end
+
+  def test_missing_region
+    @oodle.region = nil
+
+    assert_raise ArgumentError do
+      @oodle.fetch_listings
+    end
+
+    @oodle.region = ''
+
+    assert_raise ArgumentError do
+      @oodle.fetch_listings
+    end
+  end
+
+  def test_missing_category_and_query
+    @oodle.category = nil
+    @oodle.q = nil
+
+    assert_raise ArgumentError do
+      @oodle.fetch_listings
+    end
+
+    @oodle.category = ''
+    @oodle.q = ''
+
+    assert_raise ArgumentError do
+      @oodle.fetch_listings
+    end
+  end
 end
